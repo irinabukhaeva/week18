@@ -451,7 +451,7 @@ const getCookie = (name) => {
     if (cookie[0] === name) {
       const value = cookie[1] || "";
       //Ваш код
-      cookieContainer.innerHTML = `${cookie}`;
+      cookieContainer.innerHTML = `${value}`;
     }
   }
   //Ваш код
@@ -467,16 +467,22 @@ document.querySelector(".b-27").addEventListener("click", () => {
 
 const checkCookie = () => {
   //Ваш код
-  if (username !== "") {
-    //Ваш код
-    console.log(cookie);
-  } else {
-    //Ваш код
-    console.log("Cookie с именем 'username' не найден.");
+  const cookies = document.cookie.split("; ");
+  for (let i = 0; i < cookies.length; i++) {
+    const cookie = cookies[i].split("=");
+
+    if (cookie[0] === "username") {
+      console.log(cookie[1]);
+    } else {
+      console.log("Cookie с именем 'username' не найден.");
+    }
   }
 };
 
 // добавьте слушатель события
+document.querySelector(".b-28").addEventListener("click", () => {
+  checkCookie();
+});
 
 //Задание 29
 //Создайте функцию setCookie, которая принимает имя и значение cookie. Функция должна устанавливать cookie с указанным именем и значением. После установки cookie, выведите сообщение в консоль. Вызывается функция по кнопке Задание 29.
@@ -484,6 +490,7 @@ const checkCookie = () => {
 const setCookie = (name, value) => {
   document.cookie = `${name}=${value}`;
   //Ваш код
+  console.log(`${name} установлена`);
 };
 
 document.querySelector(".b-29").addEventListener("click", () => {
@@ -494,8 +501,9 @@ document.querySelector(".b-29").addEventListener("click", () => {
 //Создайте функцию deleteCookie, которая принимает имя cookie. Функция должна удалять cookie с указанным именем. После удаления cookie, выведите сообщение в консоль. Вызывается функция по кнопке Задание 30.
 
 const deleteCookie = (name) => {
-  document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+  document.cookie = `${name}=; expires=${new Date(0)}`;
   //Ваш код
+  console.log(`${name} удалена`);
 };
 
 document.querySelector(".b-30").addEventListener("click", () => {
